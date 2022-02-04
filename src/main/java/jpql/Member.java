@@ -2,6 +2,9 @@ package jpql;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.*;
+import static javax.persistence.FetchType.*;
+
 @Entity
 public class Member {
     @Id
@@ -11,9 +14,12 @@ public class Member {
     private String username;
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @Enumerated(STRING)
+    private MemberType type;
 
     public Long getId() {
         return id;
